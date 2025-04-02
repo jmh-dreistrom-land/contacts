@@ -45,14 +45,14 @@ class GeocodeCommand extends Command
         $this->googleMapsApiKey = $contactsConfiguration['googleMapsApiKey'];
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('');
 
         if (empty($this->googleMapsApiKey)) {
             $output->writeln('ApiKey is missing!');
             $output->writeln('');
-            return;
+            return Command::FAILURE;
         }
 
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
@@ -86,11 +86,10 @@ class GeocodeCommand extends Command
         if ($cntAddressesToProcess === 0) {
             $output->writeln('Nothing to do here.');
             $output->writeln('');
-            return;
+            return Command::SUCCESS;
         }
 
         $progress = new ProgressBar($output, $addressCountAll);
-
         $progress->start();
         $progress->advance($addressesProcessed);
 
@@ -130,6 +129,8 @@ class GeocodeCommand extends Command
         $output->writeln('');
 
         $progress->finish();
+
+        return Command::SUCCESS;
     }
 
     protected function geocode(string $address): array
