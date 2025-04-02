@@ -322,11 +322,29 @@ return [
         'photo' => [
             'exclude' => 1,
             'label' => $_LLL_db . ':tx_contacts_domain_model_contact.photo',
-            'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
-                'Photo',
-                ['maxitems' => 1],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            ),
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'common-image-types',
+                'maxitems' => 1,
+                'minitems' => 0,
+                'appearance' => [
+                    'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
+                ],
+                'overrideChildTca' => [
+                    'types' => [
+                        '0' => [
+                            'showitem' => '
+                                --palette--;LLL:EXT:file/Resources/Private/Language/locallang.xlf:fileimageoverlayPalette;imageoverlayPalette,
+                                --palette--;;filePalette'
+                        ],
+                        \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                            'showitem' => '
+                                --palette--;LLL:EXT:file/Resources/Private/Language/locallang.xlf:fileimageoverlayPalette;imageoverlayPalette,
+                                --palette--;;filePalette'
+                        ]
+                    ]
+                ]
+            ]
         ],
 
         'teaser' => [
