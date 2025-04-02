@@ -11,6 +11,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 
 class Address extends AbstractEntity
 {
@@ -80,25 +81,25 @@ class Address extends AbstractEntity
     protected $lat = '';
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\Contacts\Domain\Model\TtContent>
+     * @var ObjectStorage<TtContent>
      */
+    #[Lazy]
     protected $ttContent;
 
     /**
-     * @var \Extcode\Contacts\Domain\Model\Contact
+     * @var Contact
      */
     protected $contact = null;
 
     /**
-     * @var \Extcode\Contacts\Domain\Model\Company
+     * @var Company
      */
     protected $company = null;
 
     /**
      * @param string $title
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
@@ -116,7 +117,7 @@ class Address extends AbstractEntity
      *
      * @throws \InvalidArgumentException
      */
-    public function setType(string $type)
+    public function setType(string $type): void
     {
         $types = ['DOM', 'INTL', 'POSTAL', 'PARCEL', 'HOME', 'WORK'];
 
@@ -141,7 +142,7 @@ class Address extends AbstractEntity
     /**
      * @param string $street
      */
-    public function setStreet(string $street)
+    public function setStreet(string $street): void
     {
         $this->street = $street;
     }
@@ -157,7 +158,7 @@ class Address extends AbstractEntity
     /**
      * @param string $streetNumber
      */
-    public function setStreetNumber(string $streetNumber)
+    public function setStreetNumber(string $streetNumber): void
     {
         $this->streetNumber = $streetNumber;
     }
@@ -173,7 +174,7 @@ class Address extends AbstractEntity
     /**
      * @param string $addition1
      */
-    public function setAddition1(string $addition1)
+    public function setAddition1(string $addition1): void
     {
         $this->addition1 = $addition1;
     }
@@ -189,7 +190,7 @@ class Address extends AbstractEntity
     /**
      * @param string $addition2
      */
-    public function setAddition2(string $addition2)
+    public function setAddition2(string $addition2): void
     {
         $this->addition2 = $addition2;
     }
@@ -205,7 +206,7 @@ class Address extends AbstractEntity
     /**
      * @param string $zip
      */
-    public function setZip(string $zip)
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }
@@ -221,7 +222,7 @@ class Address extends AbstractEntity
     /**
      * @param string $city
      */
-    public function setCity(string $city)
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
@@ -237,7 +238,7 @@ class Address extends AbstractEntity
     /**
      * @param string $region
      */
-    public function setRegion(string $region)
+    public function setRegion(string $region): void
     {
         $this->region = $region;
     }
@@ -253,7 +254,7 @@ class Address extends AbstractEntity
     /**
      * @param Country $country
      */
-    public function setCountry(Country $country)
+    public function setCountry(Country $country): void
     {
         $this->country = $country;
     }
@@ -269,7 +270,7 @@ class Address extends AbstractEntity
     /**
      * @param string $postBox
      */
-    public function setPostBox(string $postBox)
+    public function setPostBox(string $postBox): void
     {
         $this->postBox = $postBox;
     }
@@ -285,7 +286,7 @@ class Address extends AbstractEntity
     /**
      * @param string $lat
      */
-    public function setLat(string $lat)
+    public function setLat(string $lat): void
     {
         $this->lat = $lat;
     }
@@ -301,7 +302,7 @@ class Address extends AbstractEntity
     /**
      * @param string $lon
      */
-    public function setLon(string $lon)
+    public function setLon(string $lon): void
     {
         $this->lon = $lon;
     }
@@ -317,7 +318,7 @@ class Address extends AbstractEntity
     /**
      * @param Contact $contact
      */
-    public function setContact(Contact $contact)
+    public function setContact(Contact $contact): void
     {
         $this->contact = $contact;
     }
@@ -341,7 +342,7 @@ class Address extends AbstractEntity
     /**
      * @param Company $company
      */
-    public function setCompany($company)
+    public function setCompany($company): void
     {
         $this->company = $company;
     }
@@ -349,7 +350,7 @@ class Address extends AbstractEntity
     /**
      * @param ObjectStorage $ttContent
      */
-    public function setTtContent(ObjectStorage $ttContent)
+    public function setTtContent(ObjectStorage $ttContent): void
     {
         $this->ttContent = $ttContent;
     }

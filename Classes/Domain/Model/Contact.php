@@ -11,6 +11,7 @@ namespace Extcode\Contacts\Domain\Model;
 
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 
 class Contact extends AbstractContact
 {
@@ -26,14 +27,14 @@ class Contact extends AbstractContact
 
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
+    #[Validate(['validator' => 'NotEmpty'])]
     protected $firstName;
 
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
+    #[Validate(['validator' => 'NotEmpty'])]
     protected $lastName;
 
     /**
@@ -42,12 +43,12 @@ class Contact extends AbstractContact
     protected $birthday;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\Contacts\Domain\Model\Company>
+     * @var ObjectStorage<Company>
      */
     protected $companies;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     * @var FileReference
      */
     protected $photo;
 
@@ -84,7 +85,7 @@ class Contact extends AbstractContact
     /**
      * @param string $salutation
      */
-    public function setSalutation(string $salutation)
+    public function setSalutation(string $salutation): void
     {
         $this->salutation = $salutation;
     }
@@ -100,7 +101,7 @@ class Contact extends AbstractContact
     /**
      * @param string $title
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
@@ -118,7 +119,7 @@ class Contact extends AbstractContact
      *
      * @throws \InvalidArgumentException
      */
-    public function setFirstName(string $firstName)
+    public function setFirstName(string $firstName): void
     {
         if (strlen($firstName) == 0) {
             throw new \InvalidArgumentException(
@@ -143,7 +144,7 @@ class Contact extends AbstractContact
      *
      * @throws \InvalidArgumentException
      */
-    public function setLastName(string $lastName)
+    public function setLastName(string $lastName): void
     {
         if (strlen($lastName) == 0) {
             throw new \InvalidArgumentException(
@@ -190,7 +191,7 @@ class Contact extends AbstractContact
     /**
      * @param \DateTime $birthday
      */
-    public function setBirthday(\DateTime $birthday)
+    public function setBirthday(\DateTime $birthday): void
     {
         $this->birthday = $birthday;
     }
@@ -210,7 +211,7 @@ class Contact extends AbstractContact
     /**
      * @param Company $company
      */
-    public function addCompany(Company $company)
+    public function addCompany(Company $company): void
     {
         $this->companies->attach($company);
     }
@@ -218,7 +219,7 @@ class Contact extends AbstractContact
     /**
      * @param Company $company
      */
-    public function removeCompany(Company $company)
+    public function removeCompany(Company $company): void
     {
         $this->companies->detach($company);
     }
@@ -234,7 +235,7 @@ class Contact extends AbstractContact
     /**
      * @param ObjectStorage<Company> $companies
      */
-    public function setCompanies(ObjectStorage $companies)
+    public function setCompanies(ObjectStorage $companies): void
     {
         $this->companies = $companies;
     }
@@ -250,7 +251,7 @@ class Contact extends AbstractContact
     /**
      * @param FileReference $photo
      */
-    public function setPhoto(FileReference $photo)
+    public function setPhoto(FileReference $photo): void
     {
         $this->photo = $photo;
     }

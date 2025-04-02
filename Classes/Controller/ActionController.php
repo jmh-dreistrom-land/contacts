@@ -22,23 +22,12 @@ class ActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     protected $categoryRepository;
 
     /**
-     * @var \TYPO3\CMS\Core\Domain\Repository\PageRepository
+     * @var PageRepository
      */
     protected $pageRepository;
-
-    /**
-     * @param CategoryRepository $categoryRepository
-     */
-    public function injectCategoryRepository(CategoryRepository $categoryRepository)
+    public function __construct(CategoryRepository $categoryRepository, PageRepository $pageRepository)
     {
         $this->categoryRepository = $categoryRepository;
-    }
-
-    /**
-     * @param \TYPO3\CMS\Core\Domain\Repository\PageRepository $pageRepository
-     */
-    public function injectPageRepository(PageRepository $pageRepository)
-    {
         $this->pageRepository = $pageRepository;
     }
 

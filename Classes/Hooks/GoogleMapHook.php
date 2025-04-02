@@ -159,7 +159,7 @@ class GoogleMapHook
      */
     protected function retrieveCountryCode(int $countryId): string
     {
-        $country = $this->countryRepository->findOneByUid($countryId);
+        $country = $this->countryRepository->findOneBy(['uid' => $countryId]);
 
         if ($country) {
             $countryCode = $country->getIso2();

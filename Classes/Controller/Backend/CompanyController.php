@@ -12,6 +12,7 @@ namespace Extcode\Contacts\Controller\Backend;
 use Extcode\Contacts\Domain\Model\Company;
 use Extcode\Contacts\Domain\Model\Dto\Demand;
 use Extcode\Contacts\Domain\Repository\CompanyRepository;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -30,14 +31,14 @@ class CompanyController extends ActionController
      */
     protected $pageId;
 
-    public function injectCompanyRepository(CompanyRepository $companyRepository): void
+    public function __construct(\Extcode\Contacts\Domain\Repository\CompanyRepository $companyRepository)
     {
         $this->companyRepository = $companyRepository;
     }
 
     protected function initializeAction(): void
     {
-        $this->pageId = (int)GeneralUtility::_GP('id');
+        $this->pageId = (int)($this->request->getParsedBody()['id'] ?? $this->request->getQueryParams()['id'] ?? null);
 
         $frameworkConfiguration = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
@@ -50,7 +51,7 @@ class CompanyController extends ActionController
         $this->configurationManager->setConfiguration(array_merge($frameworkConfiguration, $persistenceConfiguration));
     }
 
-    public function listAction(int $currentPage = 1): void
+    public function listAction(int $currentPage = 1): ResponseInterface
     {
         $demand = $this->createDemandObject();
 
@@ -72,16 +73,17 @@ class CompanyController extends ActionController
                 'pages' => range(1, $pagination->getLastPageNumber()),
             ]
         );
+        return $this->htmlResponse();
     }
 
     /**
      * @param Company $company
-     *
-     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("company")
      */
-    public function showAction(Company $company): void
+    #[TYPO3\CMS\Extbase\Annotation\IgnoreValidation(['argumentName' => 'company'])]
+    public function showAction(Company $company): ResponseInterface
     {
         $this->view->assign('company', $company);
+        return $this->htmlResponse();
     }
 
     protected function createDemandObject(): Demand

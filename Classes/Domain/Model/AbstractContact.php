@@ -13,16 +13,17 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 
 abstract class AbstractContact extends AbstractEntity
 {
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\Contacts\Domain\Model\Address>
+     * @var ObjectStorage<\Extcode\Contacts\Domain\Model\Address>
      */
     protected $addresses;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\Contacts\Domain\Model\Phone>
+     * @var ObjectStorage<\Extcode\Contacts\Domain\Model\Phone>
      */
     protected $phoneNumbers;
 
@@ -52,25 +53,25 @@ abstract class AbstractContact extends AbstractEntity
     protected $metaDescription = '';
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\Contacts\Domain\Model\TtContent>
+     * @var ObjectStorage<TtContent>
      */
+    #[Lazy]
     protected $ttContent;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Domain\Model\Category
+     * @var Category
      */
     protected $category;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
+     * @var ObjectStorage<Category>
      */
     protected $categories;
 
     /**
      * @param Address $address
      */
-    public function addAddress(Address $address)
+    public function addAddress(Address $address): void
     {
         $this->addresses->attach($address);
     }
@@ -78,7 +79,7 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * @param Address $address
      */
-    public function removeAddress(Address $address)
+    public function removeAddress(Address $address): void
     {
         $this->addresses->detach($address);
     }
@@ -94,7 +95,7 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * @param ObjectStorage<Address> $addresses
      */
-    public function setAddresses(ObjectStorage $addresses)
+    public function setAddresses(ObjectStorage $addresses): void
     {
         $this->addresses = $addresses;
     }
@@ -102,7 +103,7 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * @param Phone $phoneNumber
      */
-    public function addPhoneNumber(Phone $phoneNumber)
+    public function addPhoneNumber(Phone $phoneNumber): void
     {
         $this->phoneNumbers->attach($phoneNumber);
     }
@@ -110,7 +111,7 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * @param Phone $phoneNumber
      */
-    public function removePhoneNumber(Phone $phoneNumber)
+    public function removePhoneNumber(Phone $phoneNumber): void
     {
         $this->phoneNumbers->detach($phoneNumber);
     }
@@ -126,7 +127,7 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * @param ObjectStorage<Phone> $phoneNumbers
      */
-    public function setPhoneNumbers(ObjectStorage $phoneNumbers)
+    public function setPhoneNumbers(ObjectStorage $phoneNumbers): void
     {
         $this->phoneNumbers = $phoneNumbers;
     }
@@ -142,7 +143,7 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * @param string $email
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -158,7 +159,7 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * @param string $uri
      */
-    public function setUri(string $uri)
+    public function setUri(string $uri): void
     {
         $this->uri = $uri;
     }
@@ -174,7 +175,7 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * @param string $teaser
      */
-    public function setTeaser(string $teaser)
+    public function setTeaser(string $teaser): void
     {
         $this->teaser = $teaser;
     }
@@ -190,7 +191,7 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * @param string $description
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -206,7 +207,7 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * @param string $metaDescription
      */
-    public function setMetaDescription(string $metaDescription)
+    public function setMetaDescription(string $metaDescription): void
     {
         $this->metaDescription = $metaDescription;
     }
@@ -222,7 +223,7 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * @param ObjectStorage $ttContent
      */
-    public function setTtContent(ObjectStorage $ttContent)
+    public function setTtContent(ObjectStorage $ttContent): void
     {
         $this->ttContent = $ttContent;
     }
@@ -230,7 +231,7 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * Returns the Main Category
      *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\Category
+     * @return Category
      */
     public function getCategory()
     {
@@ -240,9 +241,9 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * Sets the Main Category
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category
+     * @param Category $category
      */
-    public function setCategory($category)
+    public function setCategory($category): void
     {
         $this->category = $category;
     }
@@ -250,9 +251,9 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * Adds a Product Category
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category
+     * @param Category $category
      */
-    public function addCategory(Category $category)
+    public function addCategory(Category $category): void
     {
         $this->categories->attach($category);
     }
@@ -260,9 +261,9 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * Removes a Category
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category
+     * @param Category $category
      */
-    public function removeCategory(Category $category)
+    public function removeCategory(Category $category): void
     {
         $this->categories->detach($category);
     }
@@ -270,7 +271,7 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * Returns the Categories
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category> $categories
+     * @return ObjectStorage<Category> $categories
      */
     public function getCategories()
     {
@@ -280,7 +281,7 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * Returns the First Category
      *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\Category
+     * @return Category
      */
     public function getFirstCategory()
     {
@@ -296,9 +297,9 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * Sets the Categories
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category> $categories
+     * @param ObjectStorage<Category> $categories
      */
-    public function setCategories(ObjectStorage $categories)
+    public function setCategories(ObjectStorage $categories): void
     {
         $this->categories = $categories;
     }

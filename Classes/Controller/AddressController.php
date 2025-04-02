@@ -15,6 +15,7 @@ use Extcode\Contacts\Domain\Repository\AddressRepository;
 use Extcode\Contacts\Domain\Repository\ZipRepository;
 use Extcode\Contacts\Hooks\AddressSearchAddressesLoadedHookInterface;
 use Extcode\Contacts\Utility\PageUtility;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -29,18 +30,13 @@ class AddressController extends ActionController
      * @var ZipRepository
      */
     protected $zipRepository;
-
-    public function injectAddressRepository(AddressRepository $addressRepository): void
+    public function __construct(AddressRepository $addressRepository, ZipRepository $zipRepository)
     {
         $this->addressRepository = $addressRepository;
-    }
-
-    public function injectZipRepository(ZipRepository $zipRepository): void
-    {
         $this->zipRepository = $zipRepository;
     }
 
-    public function searchAction(): void
+    public function searchAction(): ResponseInterface
     {
         $addressSearch = new AddressSearch();
         if ($this->settings['orderBy']) {
@@ -77,8 +73,8 @@ class AddressController extends ActionController
 
         $addressSearch->setPids(
             PageUtility::extendPidListByChildren(
-                $this->configurationManager->getContentObject()->data['pages'],
-                $this->configurationManager->getContentObject()->data['recursive']
+                $this->request->getAttribute('currentContentObject')->data['pages'],
+                $this->request->getAttribute('currentContentObject')->data['recursive']
             )
         );
 
@@ -96,14 +92,16 @@ class AddressController extends ActionController
         }
 
         $this->view->assign('addresses', $addresses);
+        return $this->htmlResponse();
     }
 
-    public function showAction(Address $address = null): void
+    public function showAction(Address $address = null): ResponseInterface
     {
         if (!$address) {
             $address = $this->addressRepository->findByUid($this->settings['address']);
         }
 
         $this->view->assign('address', $address);
+        return $this->htmlResponse();
     }
 }

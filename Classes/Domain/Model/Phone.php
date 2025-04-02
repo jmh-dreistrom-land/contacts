@@ -3,6 +3,7 @@
 namespace Extcode\Contacts\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 
 /*
  * This file is part of the package extcode/contacts.
@@ -19,15 +20,15 @@ class Phone extends AbstractEntity
 
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
+    #[Validate(['validator' => 'NotEmpty'])]
     protected $number = '';
 
     /**
      * @param string $type
      * @throws \InvalidArgumentException
      */
-    public function setType(string $type)
+    public function setType(string $type): void
     {
         $types = [
             'PREF',
@@ -66,7 +67,7 @@ class Phone extends AbstractEntity
     /**
      * @param string $number
      */
-    public function setNumber(string $number)
+    public function setNumber(string $number): void
     {
         $this->number = $number;
     }

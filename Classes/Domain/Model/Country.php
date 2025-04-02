@@ -4,6 +4,7 @@ namespace Extcode\Contacts\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Property\Exception;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 
 /*
  * This file is part of the package extcode/contacts.
@@ -15,20 +16,20 @@ class Country extends AbstractEntity
 {
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
+    #[Validate(['validator' => 'NotEmpty'])]
     protected $iso2 = '';
 
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
+    #[Validate(['validator' => 'NotEmpty'])]
     protected $iso3 = '';
 
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
+    #[Validate(['validator' => 'NotEmpty'])]
     protected $name = '';
 
     /**
@@ -38,16 +39,16 @@ class Country extends AbstractEntity
 
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
+    #[Validate(['validator' => 'NotEmpty'])]
     protected $phoneCountryCode = '';
 
     /**
      * @param string $iso2
      *
-     * @throws \TYPO3\CMS\Extbase\Property\Exception
+     * @throws Exception
      */
-    public function setIso2(string $iso2)
+    public function setIso2(string $iso2): void
     {
         if (strlen($iso2) != 2) {
             throw new Exception(
@@ -70,9 +71,9 @@ class Country extends AbstractEntity
     /**
      * @param string $iso3
      *
-     * @throws \TYPO3\CMS\Extbase\Property\Exception
+     * @throws Exception
      */
-    public function setIso3(string $iso3)
+    public function setIso3(string $iso3): void
     {
         if ((strlen($iso3) != 0) and (strlen($iso3) != 3)) {
             throw new Exception(
@@ -95,7 +96,7 @@ class Country extends AbstractEntity
     /**
      * @param string $name
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -111,7 +112,7 @@ class Country extends AbstractEntity
     /**
      * @param string $tld
      */
-    public function setTld(string $tld)
+    public function setTld(string $tld): void
     {
         $this->tld = $tld;
     }
@@ -127,7 +128,7 @@ class Country extends AbstractEntity
     /**
      * @param string $phoneCountryCode
      */
-    public function setPhoneCountryCode(string $phoneCountryCode)
+    public function setPhoneCountryCode(string $phoneCountryCode): void
     {
         $this->phoneCountryCode = $phoneCountryCode;
     }

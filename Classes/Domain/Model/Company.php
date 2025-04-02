@@ -11,13 +11,14 @@ namespace Extcode\Contacts\Domain\Model;
 
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 
 class Company extends AbstractContact
 {
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
+    #[Validate(['validator' => 'NotEmpty'])]
     protected $name;
 
     /**
@@ -51,22 +52,22 @@ class Company extends AbstractContact
     protected $vatId = '';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\Contacts\Domain\Model\Contact>
+     * @var ObjectStorage<Contact>
      */
     protected $directors;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\Contacts\Domain\Model\Contact>
+     * @var ObjectStorage<Contact>
      */
     protected $contacts;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\Contacts\Domain\Model\Company>
+     * @var ObjectStorage<Company>
      */
     protected $companies;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     * @var FileReference
      */
     protected $logo = null;
 
@@ -91,7 +92,7 @@ class Company extends AbstractContact
      *
      * @throws \InvalidArgumentException
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         if (strlen($name) == 0) {
             throw new \InvalidArgumentException(
@@ -114,7 +115,7 @@ class Company extends AbstractContact
     /**
      * @param string $legalName
      */
-    public function setLegalName(string $legalName)
+    public function setLegalName(string $legalName): void
     {
         $this->legalName = $legalName;
     }
@@ -130,7 +131,7 @@ class Company extends AbstractContact
     /**
      * @param string $legalForm
      */
-    public function setLegalForm(string $legalForm)
+    public function setLegalForm(string $legalForm): void
     {
         $this->legalForm = $legalForm;
     }
@@ -146,7 +147,7 @@ class Company extends AbstractContact
     /**
      * @param string $registeredOffice
      */
-    public function setRegisteredOffice(string $registeredOffice)
+    public function setRegisteredOffice(string $registeredOffice): void
     {
         $this->registeredOffice = $registeredOffice;
     }
@@ -162,7 +163,7 @@ class Company extends AbstractContact
     /**
      * @param string $registerCourt
      */
-    public function setRegisterCourt(string $registerCourt)
+    public function setRegisterCourt(string $registerCourt): void
     {
         $this->registerCourt = $registerCourt;
     }
@@ -178,7 +179,7 @@ class Company extends AbstractContact
     /**
      * @param string $registerNumber
      */
-    public function setRegisterNumber(string $registerNumber)
+    public function setRegisterNumber(string $registerNumber): void
     {
         $this->registerNumber = $registerNumber;
     }
@@ -194,7 +195,7 @@ class Company extends AbstractContact
     /**
      * @param string $vatId
      */
-    public function setVatId(string $vatId)
+    public function setVatId(string $vatId): void
     {
         $this->vatId = $vatId;
     }
@@ -202,7 +203,7 @@ class Company extends AbstractContact
     /**
      * @param Contact $director
      */
-    public function addDirector(Contact $director)
+    public function addDirector(Contact $director): void
     {
         $this->directors->attach($director);
     }
@@ -210,7 +211,7 @@ class Company extends AbstractContact
     /**
      * @param Contact $director
      */
-    public function removeDirector(Contact $director)
+    public function removeDirector(Contact $director): void
     {
         $this->directors->detach($director);
     }
@@ -226,7 +227,7 @@ class Company extends AbstractContact
     /**
      * @param ObjectStorage<Contact> $directors
      */
-    public function setDirectors($directors)
+    public function setDirectors($directors): void
     {
         $this->directors = $directors;
     }
@@ -234,7 +235,7 @@ class Company extends AbstractContact
     /**
      * @param Contact $contact
      */
-    public function addContact(Contact $contact)
+    public function addContact(Contact $contact): void
     {
         $this->contacts->attach($contact);
     }
@@ -242,7 +243,7 @@ class Company extends AbstractContact
     /**
      * @param Contact $contact
      */
-    public function removeContact(Contact $contact)
+    public function removeContact(Contact $contact): void
     {
         $this->contacts->detach($contact);
     }
@@ -258,7 +259,7 @@ class Company extends AbstractContact
     /**
      * @param ObjectStorage<Contact> $contacts
      */
-    public function setContacts(ObjectStorage $contacts)
+    public function setContacts(ObjectStorage $contacts): void
     {
         $this->contacts = $contacts;
     }
@@ -266,7 +267,7 @@ class Company extends AbstractContact
     /**
      * @param Company $company
      */
-    public function addCompany(self $company)
+    public function addCompany(self $company): void
     {
         $this->companies->attach($company);
     }
@@ -274,7 +275,7 @@ class Company extends AbstractContact
     /**
      * @param Company $company
      */
-    public function removeCompany(self $company)
+    public function removeCompany(self $company): void
     {
         $this->companies->detach($company);
     }
@@ -290,7 +291,7 @@ class Company extends AbstractContact
     /**
      * @param ObjectStorage<Company> $companies
      */
-    public function setCompanies(ObjectStorage $companies)
+    public function setCompanies(ObjectStorage $companies): void
     {
         $this->companies = $companies;
     }
@@ -306,7 +307,7 @@ class Company extends AbstractContact
     /**
      * @param FileReference $logo
      */
-    public function setLogo(FileReference $logo)
+    public function setLogo(FileReference $logo): void
     {
         $this->logo = $logo;
     }

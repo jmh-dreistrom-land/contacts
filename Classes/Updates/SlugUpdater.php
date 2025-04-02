@@ -11,6 +11,7 @@ namespace Extcode\Contacts\Updates;
  */
 
 use Symfony\Component\Console\Output\OutputInterface;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -79,12 +80,13 @@ class SlugUpdater implements UpgradeWizardInterface, ChattyInterface
         $elementCount = $queryBuilder->count('uid')
             ->from($tableName)
             ->where(
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->eq('path_segment', $queryBuilder->createNamedParameter('', \PDO::PARAM_STR)),
+                $queryBuilder->expr()->or(
+                    $queryBuilder->expr()->eq('path_segment', $queryBuilder->createNamedParameter('', Connection::PARAM_STR)),
                     $queryBuilder->expr()->isNull('path_segment')
                 )
             )
-            ->execute()->fetchColumn(0);
+            ->executeQuery()
+            ->fetchOne(0);
 
         return (bool)$elementCount;
     }
@@ -143,26 +145,26 @@ class SlugUpdater implements UpgradeWizardInterface, ChattyInterface
         $statement = $queryBuilder->select('*')
             ->from($tableName)
             ->where(
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->eq('path_segment', $queryBuilder->createNamedParameter('', \PDO::PARAM_STR)),
+                $queryBuilder->expr()->or(
+                    $queryBuilder->expr()->eq('path_segment', $queryBuilder->createNamedParameter('', Connection::PARAM_STR)),
                     $queryBuilder->expr()->isNull('path_segment')
                 )
             )
-            ->execute();
-        while ($record = $statement->fetch()) {
-            $slug = $slugHelper->generate($record, $record['pid']);
+            ->executeQuery();
+        while ($record = $statement->fetchAllAssociative() ) {
+            $slug = $slugHelper->generate($record, (int) $record['pid']);
 
             $queryBuilder = $connection->createQueryBuilder();
             $queryBuilder->update($tableName)
                 ->where(
                     $queryBuilder->expr()->eq(
                         'uid',
-                        $queryBuilder->createNamedParameter($record['uid'], \PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter($record['uid'], Connection::PARAM_INT)
                     )
                 )
                 ->set('path_segment', $slug);
             $queryBuilder->getSQL();
-            $queryBuilder->execute();
+            $queryBuilder->executeQuery();
         }
 
         return true;

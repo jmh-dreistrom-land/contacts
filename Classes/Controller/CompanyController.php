@@ -11,7 +11,7 @@ namespace Extcode\Contacts\Controller;
 
 use Extcode\Contacts\Domain\Model\Company;
 use Extcode\Contacts\Domain\Repository\CompanyRepository;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 class CompanyController extends ActionController
@@ -26,7 +26,7 @@ class CompanyController extends ActionController
      */
     protected $pageId;
 
-    public function injectCompanyRepository(CompanyRepository $companyRepository): void
+    public function __construct(CompanyRepository $companyRepository)
     {
         $this->companyRepository = $companyRepository;
     }
@@ -34,7 +34,7 @@ class CompanyController extends ActionController
     protected function initializeAction(): void
     {
         if ($GLOBALS['TSFE'] === null) {
-            $this->pageId = (int)GeneralUtility::_GP('id');
+            $this->pageId = (int)($this->request->getParsedBody()['id'] ?? $this->request->getQueryParams()['id'] ?? null);
         } else {
             $this->pageId = $GLOBALS['TSFE']->id;
         }
@@ -61,7 +61,7 @@ class CompanyController extends ActionController
         }
     }
 
-    public function listAction(): void
+    public function listAction(): ResponseInterface
     {
         $demand = $this->createDemandObjectFromSettings($this->settings);
         $demand->setActionAndClass(__METHOD__, __CLASS__);
@@ -71,9 +71,10 @@ class CompanyController extends ActionController
         $this->view->assign('demand', $demand);
         $this->view->assign('companies', $companies);
         $this->view->assign('categories', $this->getSelectedCategories($demand));
+        return $this->htmlResponse();
     }
 
-    public function showAction(Company $company = null): void
+    public function showAction(Company $company = null): ResponseInterface
     {
         if (!$company && (int)$this->settings['company']) {
             $company = $this->companyRepository->findByUid((int)$this->settings['company']);
@@ -82,14 +83,16 @@ class CompanyController extends ActionController
         $this->view->assign('company', $company);
 
         $this->addCacheTags([$company]);
+        return $this->htmlResponse();
     }
 
-    public function teaserAction(): void
+    public function teaserAction(): ResponseInterface
     {
         $companies = $this->companyRepository->findByUids($this->settings['companyUids']);
         $this->view->assign('companies', $companies);
 
         $this->addCacheTags($companies);
+        return $this->htmlResponse();
     }
 
     protected function addCacheTags(array $companies): void

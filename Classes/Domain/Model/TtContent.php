@@ -358,7 +358,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $crdate
      */
-    public function setCrdate($crdate)
+    public function setCrdate($crdate): void
     {
         $this->crdate = $crdate;
     }
@@ -374,7 +374,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $tstamp
      */
-    public function setTstamp($tstamp)
+    public function setTstamp($tstamp): void
     {
         $this->tstamp = $tstamp;
     }
@@ -390,7 +390,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $contentType
      */
-    public function setContentType($contentType)
+    public function setContentType($contentType): void
     {
         $this->contentType = $contentType;
     }
@@ -406,7 +406,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $header
      */
-    public function setHeader($header)
+    public function setHeader($header): void
     {
         $this->header = $header;
     }
@@ -422,7 +422,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $headerPosition
      */
-    public function setHeaderPosition($headerPosition)
+    public function setHeaderPosition($headerPosition): void
     {
         $this->headerPosition = $headerPosition;
     }
@@ -438,7 +438,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $bodytext
      */
-    public function setBodytext($bodytext)
+    public function setBodytext($bodytext): void
     {
         $this->bodytext = $bodytext;
     }
@@ -458,7 +458,7 @@ class TtContent extends AbstractEntity
      *
      * @param int $colPos
      */
-    public function setColPos($colPos)
+    public function setColPos($colPos): void
     {
         $this->colPos = $colPos;
     }
@@ -474,7 +474,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $image
      */
-    public function setImage($image)
+    public function setImage($image): void
     {
         $this->image = $image;
     }
@@ -490,7 +490,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $imagewidth
      */
-    public function setImagewidth($imagewidth)
+    public function setImagewidth($imagewidth): void
     {
         $this->imagewidth = $imagewidth;
     }
@@ -506,7 +506,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $imageheight
      */
-    public function setImageheight($imageheight)
+    public function setImageheight($imageheight): void
     {
         $this->imageheight = $imageheight;
     }
@@ -522,7 +522,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $imageorient
      */
-    public function setImageorient($imageorient)
+    public function setImageorient($imageorient): void
     {
         $this->imageorient = $imageorient;
     }
@@ -538,7 +538,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $imagecaption
      */
-    public function setImagecaption($imagecaption)
+    public function setImagecaption($imagecaption): void
     {
         $this->imagecaption = $imagecaption;
     }
@@ -554,7 +554,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $imagecols
      */
-    public function setImagecols($imagecols)
+    public function setImagecols($imagecols): void
     {
         $this->imagecols = $imagecols;
     }
@@ -570,7 +570,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $imageborder
      */
-    public function setImageborder($imageborder)
+    public function setImageborder($imageborder): void
     {
         $this->imageborder = $imageborder;
     }
@@ -586,7 +586,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $media
      */
-    public function setMedia($media)
+    public function setMedia($media): void
     {
         $this->media = $media;
     }
@@ -602,7 +602,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $layout
      */
-    public function setLayout($layout)
+    public function setLayout($layout): void
     {
         $this->layout = $layout;
     }
@@ -618,7 +618,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $cols
      */
-    public function setCols($cols)
+    public function setCols($cols): void
     {
         $this->cols = $cols;
     }
@@ -634,7 +634,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $subheader
      */
-    public function setSubheader($subheader)
+    public function setSubheader($subheader): void
     {
         $this->subheader = $subheader;
     }
@@ -650,7 +650,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $headerLink
      */
-    public function setHeaderLink($headerLink)
+    public function setHeaderLink($headerLink): void
     {
         $this->headerLink = $headerLink;
     }
@@ -666,7 +666,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $imageLink
      */
-    public function setImageLink($imageLink)
+    public function setImageLink($imageLink): void
     {
         $this->imageLink = $imageLink;
     }
@@ -682,7 +682,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $imageZoom
      */
-    public function setImageZoom($imageZoom)
+    public function setImageZoom($imageZoom): void
     {
         $this->imageZoom = $imageZoom;
     }
@@ -698,7 +698,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $altText
      */
-    public function setAltText($altText)
+    public function setAltText($altText): void
     {
         $this->altText = $altText;
     }
@@ -714,7 +714,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $titleText
      */
-    public function setTitleText($titleText)
+    public function setTitleText($titleText): void
     {
         $this->titleText = $titleText;
     }
@@ -730,7 +730,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $headerLayout
      */
-    public function setHeaderLayout($headerLayout)
+    public function setHeaderLayout($headerLayout): void
     {
         $this->headerLayout = $headerLayout;
     }
@@ -746,7 +746,7 @@ class TtContent extends AbstractEntity
     /**
      * @param string $listType
      */
-    public function setListType($listType)
+    public function setListType($listType): void
     {
         $this->listType = $listType;
     }
@@ -762,7 +762,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $records
      */
-    public function setRecords($records)
+    public function setRecords($records): void
     {
         $this->records = $records;
     }
@@ -778,7 +778,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $pages
      */
-    public function setPages($pages)
+    public function setPages($pages): void
     {
         $this->pages = $pages;
     }
@@ -794,7 +794,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $feGroup
      */
-    public function setFeGroup($feGroup)
+    public function setFeGroup($feGroup): void
     {
         $this->feGroup = $feGroup;
     }
@@ -810,7 +810,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $imagecaptionPosition
      */
-    public function setImagecaptionPosition($imagecaptionPosition)
+    public function setImagecaptionPosition($imagecaptionPosition): void
     {
         $this->imagecaptionPosition = $imagecaptionPosition;
     }
@@ -826,7 +826,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $longdescUrl
      */
-    public function setLongdescUrl($longdescUrl)
+    public function setLongdescUrl($longdescUrl): void
     {
         $this->longdescUrl = $longdescUrl;
     }
@@ -842,7 +842,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $menuType
      */
-    public function setMenuType($menuType)
+    public function setMenuType($menuType): void
     {
         $this->menuType = $menuType;
     }
@@ -858,7 +858,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $selectKey
      */
-    public function setSelectKey($selectKey)
+    public function setSelectKey($selectKey): void
     {
         $this->selectKey = $selectKey;
     }
@@ -874,7 +874,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $fileCollections
      */
-    public function setFileCollections($fileCollections)
+    public function setFileCollections($fileCollections): void
     {
         $this->fileCollections = $fileCollections;
     }
@@ -890,7 +890,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $filelinkSorting
      */
-    public function setFilelinkSorting($filelinkSorting)
+    public function setFilelinkSorting($filelinkSorting): void
     {
         $this->filelinkSorting = $filelinkSorting;
     }
@@ -906,7 +906,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $target
      */
-    public function setTarget($target)
+    public function setTarget($target): void
     {
         $this->target = $target;
     }
@@ -922,7 +922,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $multimedia
      */
-    public function setMultimedia($multimedia)
+    public function setMultimedia($multimedia): void
     {
         $this->multimedia = $multimedia;
     }
@@ -938,7 +938,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $piFlexform
      */
-    public function setPiFlexform($piFlexform)
+    public function setPiFlexform($piFlexform): void
     {
         $this->piFlexform = $piFlexform;
     }
@@ -954,7 +954,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $accessibilityTitle
      */
-    public function setAccessibilityTitle($accessibilityTitle)
+    public function setAccessibilityTitle($accessibilityTitle): void
     {
         $this->accessibilityTitle = $accessibilityTitle;
     }
@@ -970,7 +970,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $accessibilityBypassText
      */
-    public function setAccessibilityBypassText($accessibilityBypassText)
+    public function setAccessibilityBypassText($accessibilityBypassText): void
     {
         $this->accessibilityBypassText = $accessibilityBypassText;
     }
@@ -986,7 +986,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $selectedCategories
      */
-    public function setSelectedCategories($selectedCategories)
+    public function setSelectedCategories($selectedCategories): void
     {
         $this->selectedCategories = $selectedCategories;
     }
@@ -1002,7 +1002,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $categoryField
      */
-    public function setCategoryField($categoryField)
+    public function setCategoryField($categoryField): void
     {
         $this->categoryField = $categoryField;
     }
@@ -1018,7 +1018,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $spaceBefore
      */
-    public function setSpaceBefore($spaceBefore)
+    public function setSpaceBefore($spaceBefore): void
     {
         $this->spaceBefore = $spaceBefore;
     }
@@ -1034,7 +1034,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $spaceAfter
      */
-    public function setSpaceAfter($spaceAfter)
+    public function setSpaceAfter($spaceAfter): void
     {
         $this->spaceAfter = $spaceAfter;
     }
@@ -1050,7 +1050,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $imageNoRows
      */
-    public function setImageNoRows($imageNoRows)
+    public function setImageNoRows($imageNoRows): void
     {
         $this->imageNoRows = $imageNoRows;
     }
@@ -1066,7 +1066,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $imageEffects
      */
-    public function setImageEffects($imageEffects)
+    public function setImageEffects($imageEffects): void
     {
         $this->imageEffects = $imageEffects;
     }
@@ -1082,7 +1082,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $imageCompression
      */
-    public function setImageCompression($imageCompression)
+    public function setImageCompression($imageCompression): void
     {
         $this->imageCompression = $imageCompression;
     }
@@ -1098,7 +1098,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $tableBorder
      */
-    public function setTableBorder($tableBorder)
+    public function setTableBorder($tableBorder): void
     {
         $this->tableBorder = $tableBorder;
     }
@@ -1114,7 +1114,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $tableCellspacing
      */
-    public function setTableCellspacing($tableCellspacing)
+    public function setTableCellspacing($tableCellspacing): void
     {
         $this->tableCellspacing = $tableCellspacing;
     }
@@ -1130,7 +1130,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $tableCellpadding
      */
-    public function setTableCellpadding($tableCellpadding)
+    public function setTableCellpadding($tableCellpadding): void
     {
         $this->tableCellpadding = $tableCellpadding;
     }
@@ -1146,7 +1146,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $tableBgColor
      */
-    public function setTableBgColor($tableBgColor)
+    public function setTableBgColor($tableBgColor): void
     {
         $this->tableBgColor = $tableBgColor;
     }
@@ -1162,7 +1162,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $sectionIndex
      */
-    public function setSectionIndex($sectionIndex)
+    public function setSectionIndex($sectionIndex): void
     {
         $this->sectionIndex = $sectionIndex;
     }
@@ -1178,7 +1178,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $linkToTop
      */
-    public function setLinkToTop($linkToTop)
+    public function setLinkToTop($linkToTop): void
     {
         $this->linkToTop = $linkToTop;
     }
@@ -1194,7 +1194,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $filelinkSize
      */
-    public function setFilelinkSize($filelinkSize)
+    public function setFilelinkSize($filelinkSize): void
     {
         $this->filelinkSize = $filelinkSize;
     }
@@ -1210,7 +1210,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $sectionFrame
      */
-    public function setSectionFrame($sectionFrame)
+    public function setSectionFrame($sectionFrame): void
     {
         $this->sectionFrame = $sectionFrame;
     }
@@ -1226,7 +1226,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $date
      */
-    public function setDate($date)
+    public function setDate($date): void
     {
         $this->date = $date;
     }
@@ -1242,7 +1242,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $imageFrames
      */
-    public function setImageFrames($imageFrames)
+    public function setImageFrames($imageFrames): void
     {
         $this->imageFrames = $imageFrames;
     }
@@ -1258,7 +1258,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $recursive
      */
-    public function setRecursive($recursive)
+    public function setRecursive($recursive): void
     {
         $this->recursive = $recursive;
     }
@@ -1274,7 +1274,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $rteEnabled
      */
-    public function setRteEnabled($rteEnabled)
+    public function setRteEnabled($rteEnabled): void
     {
         $this->rteEnabled = $rteEnabled;
     }
@@ -1290,7 +1290,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $txImpexpOriguid
      */
-    public function setTxImpexpOriguid($txImpexpOriguid)
+    public function setTxImpexpOriguid($txImpexpOriguid): void
     {
         $this->txImpexpOriguid = $txImpexpOriguid;
     }
@@ -1306,7 +1306,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $accessibilityBypass
      */
-    public function setAccessibilityBypass($accessibilityBypass)
+    public function setAccessibilityBypass($accessibilityBypass): void
     {
         $this->accessibilityBypass = $accessibilityBypass;
     }
@@ -1322,7 +1322,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $sysLanguageUid
      */
-    public function setSysLanguageUid($sysLanguageUid)
+    public function setSysLanguageUid($sysLanguageUid): void
     {
         $this->sysLanguageUid = $sysLanguageUid;
     }
@@ -1338,7 +1338,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $starttime
      */
-    public function setStarttime($starttime)
+    public function setStarttime($starttime): void
     {
         $this->starttime = $starttime;
     }
@@ -1354,7 +1354,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $endtime
      */
-    public function setEndtime($endtime)
+    public function setEndtime($endtime): void
     {
         $this->endtime = $endtime;
     }
@@ -1370,7 +1370,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $txGridelementsBackendLayout
      */
-    public function setTxGridelementsBackendLayout($txGridelementsBackendLayout)
+    public function setTxGridelementsBackendLayout($txGridelementsBackendLayout): void
     {
         $this->txGridelementsBackendLayout = $txGridelementsBackendLayout;
     }
@@ -1386,7 +1386,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $txGridelementsChildren
      */
-    public function setTxGridelementsChildren($txGridelementsChildren)
+    public function setTxGridelementsChildren($txGridelementsChildren): void
     {
         $this->txGridelementsChildren = $txGridelementsChildren;
     }
@@ -1402,7 +1402,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $txGridelementsContainer
      */
-    public function setTxGridelementsContainer($txGridelementsContainer)
+    public function setTxGridelementsContainer($txGridelementsContainer): void
     {
         $this->txGridelementsContainer = $txGridelementsContainer;
     }
@@ -1418,7 +1418,7 @@ class TtContent extends AbstractEntity
     /**
      * @param $txGridelementsColumns
      */
-    public function setTxGridelementsColumns($txGridelementsColumns)
+    public function setTxGridelementsColumns($txGridelementsColumns): void
     {
         $this->txGridelementsColumns = $txGridelementsColumns;
     }
