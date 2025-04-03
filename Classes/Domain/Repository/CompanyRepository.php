@@ -47,14 +47,14 @@ class CompanyRepository extends Repository
                 }
             }
 
-            $constraints = $query->logicalOr($categoryConstraints);
+            $constraints = $query->logicalOr(...$categoryConstraints);
         }
 
         // create constraint
         if (!empty($constraints)) {
             $query->matching(
                 $query->logicalAnd(
-                    $query->logicalOr($constraints)
+                    $query->logicalOr(...$constraints)
                 )
             );
         }
