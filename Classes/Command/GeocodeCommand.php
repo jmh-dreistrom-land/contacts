@@ -64,8 +64,8 @@ class GeocodeCommand extends Command
             ->where(
                 $queryBuilder->expr()->eq('deleted', 0)
             )
-            ->execute()
-            ->fetchColumn(0);
+            ->executeQuery()
+            ->fetchOne();
 
         $addresses = $queryBuilder
             ->select('uid', 'lat', 'lon', 'street', 'street_number', 'zip', 'city')
@@ -77,8 +77,8 @@ class GeocodeCommand extends Command
                     $queryBuilder->expr()->eq('lon', 0)
                 )
             )
-            ->execute()
-            ->fetchAll();
+            ->executeQuery()
+            ->fetchAllAssociative();
 
         $cntAddressesToProcess = count($addresses);
         $addressesProcessed = $addressCountAll - $cntAddressesToProcess;

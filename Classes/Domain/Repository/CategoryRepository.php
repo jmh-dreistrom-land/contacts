@@ -109,6 +109,6 @@ class CategoryRepository extends Repository
                 $queryBuilder->expr()->in('uid', $demand->getAvailableCategories())
             );
 
-        return $queryBuilder->execute()->fetchAll();
+        return $queryBuilder->executeQuery()->fetchAllAssociative();
     }
 }
