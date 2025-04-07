@@ -73,8 +73,8 @@ class AddressController extends ActionController
 
         $addressSearch->setPids(
             PageUtility::extendPidListByChildren(
-                $this->request->getAttribute('currentContentObject')->data['pages'],
-                $this->request->getAttribute('currentContentObject')->data['recursive']
+                $this->request->getAttribute('currentContentObject')->data['pages'] ?? '',
+                $this->request->getAttribute('currentContentObject')->data['recursive'] ?? ''
             )
         );
 
