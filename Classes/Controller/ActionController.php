@@ -16,20 +16,22 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-    /**
-     * @var CategoryRepository
-     */
-    protected $categoryRepository;
 
-    /**
-     * @var PageRepository
-     */
-    protected $pageRepository;
-    public function __construct(CategoryRepository $categoryRepository, PageRepository $pageRepository)
+    // ########### CategoryRepository DI DO NOT WORK !!!! ###########
+
+    protected CategoryRepository $categoryRepository;
+    protected PageRepository $pageRepository;
+
+    public function injectPageRepository(PageRepository $pageRepository)
     {
-        $this->categoryRepository = $categoryRepository;
         $this->pageRepository = $pageRepository;
     }
+//
+//    public function __construct(CategoryRepository $categoryRepository, PageRepository $pageRepository)
+//    {
+//        $this->categoryRepository = $categoryRepository;
+//        $this->pageRepository = $pageRepository;
+//    }
 
     /**
      * Create the demand object which define which records will get shown
@@ -71,6 +73,7 @@ class ActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     protected function addCategoriesToDemandObjectFromSettings(&$demand)
     {
+        $this->categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
         if ($this->settings['categoriesList']) {
             $selectedCategories = GeneralUtility::intExplode(
                 ',',
@@ -104,6 +107,9 @@ class ActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     protected function getSelectedCategories(Demand $demand): array
     {
         $translatedCategories = [];
+
+        $this->categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
+//        $this->pageRepository = GeneralUtility::makeInstance(PageRepository::class);
 
         $categories = $this->categoryRepository->findFromDemand($demand);
 
