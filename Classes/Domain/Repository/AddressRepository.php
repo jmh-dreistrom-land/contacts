@@ -125,7 +125,7 @@ class AddressRepository extends Repository
                 $queryBuilder->expr()->in('uid', $ids)
             );
 
-        $queryResult = $queryBuilder->execute()->fetchAll();
+        $queryResult = $queryBuilder->executeQuery()->fetchAllAssociative();
 
         $uids = array_column($queryResult, 'uid');
         $queryResult = array_combine($uids, $queryResult);
@@ -257,7 +257,7 @@ class AddressRepository extends Repository
             $queryBuilder->orderBy($addressSearch->getFallbackOrderBy());
         }
 
-        $addresses = $queryBuilder->execute()->fetchAll();
+        $addresses = $queryBuilder->executeQuery()->fetchAllAssociative();
 
         if ($addressSearch->getLat() !== 0.0 && $addressSearch->getLon() !== 0.0 && $addressSearch->getRadius() !== 0) {
             $addressesInDistance = [];
