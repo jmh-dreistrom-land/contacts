@@ -18,6 +18,7 @@ call_user_func(function () {
         'ContactTeaser',
     ];
 
+
     foreach ($pluginNames as $pluginName) {
         $pluginSignature = 'contacts_' . strtolower($pluginName);
         ExtensionUtility::registerPlugin(
@@ -27,11 +28,10 @@ call_user_func(function () {
         );
         $flexFormPath = 'EXT:contacts/Configuration/FlexForms/' . $pluginName . 'Plugin.xml';
         if (file_exists(GeneralUtility::getFileAbsFileName($flexFormPath))) {
-            ExtensionManagementUtility::addToAllTCAtypes('tt_content', '--div--;Configuration,pi_flexform,pages,recursive,', $pluginSignature, 'after:subheader');
+            $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
             ExtensionManagementUtility::addPiFlexFormValue(
-                '*',
-                'FILE:' . $flexFormPath,
-                $pluginSignature
+                $pluginSignature,
+                'FILE:' . $flexFormPath
             );
         }
     }

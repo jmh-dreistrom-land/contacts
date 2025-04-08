@@ -22,8 +22,7 @@ ExtensionUtility::configurePlugin(
     ],
     [
         ContactController::class => 'list',
-    ],
-    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+    ]
 );
 
 ExtensionUtility::configurePlugin(
@@ -34,8 +33,7 @@ ExtensionUtility::configurePlugin(
     ],
     [
         ContactController::class => '',
-    ],
-    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+    ]
 );
 
 ExtensionUtility::configurePlugin(
@@ -46,8 +44,7 @@ ExtensionUtility::configurePlugin(
     ],
     [
         CompanyController::class => 'list',
-    ],
-    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+    ]
 );
 
 ExtensionUtility::configurePlugin(
@@ -58,8 +55,7 @@ ExtensionUtility::configurePlugin(
     ],
     [
         CompanyController::class => '',
-    ],
-    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+    ]
 );
 
 ExtensionUtility::configurePlugin(
@@ -70,8 +66,7 @@ ExtensionUtility::configurePlugin(
     ],
     [
         AddressController::class => 'search',
-    ],
-    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+    ]
 );
 
 ExtensionUtility::configurePlugin(
@@ -82,8 +77,7 @@ ExtensionUtility::configurePlugin(
     ],
     [
         AddressController::class => '',
-    ],
-    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+    ]
 );
 
 // register "contacts:" namespace
