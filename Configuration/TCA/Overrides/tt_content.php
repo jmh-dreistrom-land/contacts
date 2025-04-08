@@ -24,7 +24,8 @@ call_user_func(function () {
         ExtensionUtility::registerPlugin(
             'Contacts',
             $pluginName,
-            $_LLL_db . ':tx_contacts.plugin.' . lcfirst($pluginName)
+            $_LLL_db . ':tx_contacts.plugin.' . lcfirst($pluginName),
+            'EXT:contacts/Resources/Public/Icons/Extension.svg',
         );
         $flexFormPath = 'EXT:contacts/Configuration/FlexForms/' . $pluginName . 'Plugin.xml';
         if (file_exists(GeneralUtility::getFileAbsFileName($flexFormPath))) {
