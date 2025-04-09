@@ -17,7 +17,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class ActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
 
-    // ########### CategoryRepository DI DO NOT WORK !!!! ###########
 
     protected CategoryRepository $categoryRepository;
     protected PageRepository $pageRepository;
@@ -26,6 +25,7 @@ class ActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     {
         $this->pageRepository = $pageRepository;
     }
+    // ########### DI in construct() DO NOT WORK ###########
 //
 //    public function __construct(CategoryRepository $categoryRepository, PageRepository $pageRepository)
 //    {
@@ -71,7 +71,7 @@ class ActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     /**
      * @param Demand $demand
      */
-    protected function addCategoriesToDemandObjectFromSettings(&$demand)
+    protected function addCategoriesToDemandObjectFromSettings(&$demand): void
     {
         $this->categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
         if ($this->settings['categoriesList']) {
