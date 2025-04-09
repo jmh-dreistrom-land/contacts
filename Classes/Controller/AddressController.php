@@ -21,20 +21,10 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class AddressController extends ActionController
 {
-    /**
-     * @var AddressRepository
-     */
-    protected $addressRepository;
-
-    /**
-     * @var ZipRepository
-     */
-    protected $zipRepository;
-    public function __construct(AddressRepository $addressRepository, ZipRepository $zipRepository)
-    {
-        $this->addressRepository = $addressRepository;
-        $this->zipRepository = $zipRepository;
-    }
+    public function __construct(
+        protected AddressRepository $addressRepository,
+        protected ZipRepository $zipRepository)
+    {}
 
     public function searchAction(): ResponseInterface
     {
