@@ -86,7 +86,7 @@ class SlugUpdater implements UpgradeWizardInterface, ChattyInterface
                 )
             )
             ->executeQuery()
-            ->fetchOne(0);
+            ->fetchOne();
 
         return (bool)$elementCount;
     }
