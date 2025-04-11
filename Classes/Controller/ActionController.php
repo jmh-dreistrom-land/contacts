@@ -25,13 +25,11 @@ class ActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     {
         $this->pageRepository = $pageRepository;
     }
-    // ########### DI in construct() DO NOT WORK ###########
-//
-//    public function __construct(CategoryRepository $categoryRepository, PageRepository $pageRepository)
-//    {
-//        $this->categoryRepository = $categoryRepository;
-//        $this->pageRepository = $pageRepository;
-//    }
+
+    public function injectCategoryRepository(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
 
     /**
      * Create the demand object which define which records will get shown
@@ -73,7 +71,6 @@ class ActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     protected function addCategoriesToDemandObjectFromSettings(&$demand): void
     {
-        $this->categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
         if ($this->settings['categoriesList']) {
             $selectedCategories = GeneralUtility::intExplode(
                 ',',
@@ -107,9 +104,6 @@ class ActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     protected function getSelectedCategories(Demand $demand): array
     {
         $translatedCategories = [];
-
-        $this->categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
-//        $this->pageRepository = GeneralUtility::makeInstance(PageRepository::class);
 
         $categories = $this->categoryRepository->findFromDemand($demand);
 
