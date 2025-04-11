@@ -13,21 +13,11 @@ use TYPO3\CMS\Extbase\Annotation\Validate;
  */
 class Phone extends AbstractEntity
 {
-    /**
-     * @var string
-     */
-    protected $type = 'VOICE';
+    protected string $type = 'VOICE';
 
-    /**
-     * @var string
-     */
     #[Validate(['validator' => 'NotEmpty'])]
-    protected $number = '';
+    protected string $number = '';
 
-    /**
-     * @param string $type
-     * @throws \InvalidArgumentException
-     */
     public function setType(string $type): void
     {
         $types = [
@@ -56,26 +46,17 @@ class Phone extends AbstractEntity
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $number
-     */
     public function setNumber(string $number): void
     {
         $this->number = $number;
     }
 
-    /**
-     * @return string
-     */
-    public function getNumber()
+    public function getNumber(): string
     {
         return $this->number;
     }

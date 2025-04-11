@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Extcode\Contacts\Domain\Model;
 
-use TYPO3\CMS\Extbase\Domain\Model\Category;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /*
  * This file is part of the package extcode/contacts.
  *
@@ -12,82 +10,60 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  * LICENSE file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Extbase\Domain\Model\Category;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 
 abstract class AbstractContact extends AbstractEntity
 {
     /**
-     * @var ObjectStorage<\Extcode\Contacts\Domain\Model\Address>
+     * @var ?ObjectStorage<Address>
      */
-    protected $addresses;
+    protected ?ObjectStorage $addresses;
 
     /**
-     * @var ObjectStorage<\Extcode\Contacts\Domain\Model\Phone>
+     * @var ?ObjectStorage<Phone>
      */
-    protected $phoneNumbers;
+    protected ?ObjectStorage $phoneNumbers;
+
+    protected string $email = '';
+
+    protected string $uri = '';
+
+    protected string $teaser = '';
+
+    protected string $description = '';
+
+    protected string $metaDescription = '';
 
     /**
-     * @var string
-     */
-    protected $email = '';
-
-    /**
-     * @var string
-     */
-    protected $uri = '';
-
-    /**
-     * @var string
-     */
-    protected $teaser = '';
-
-    /**
-     * @var string
-     */
-    protected $description = '';
-
-    /**
-     * @var string
-     */
-    protected $metaDescription = '';
-
-    /**
-     * @var ObjectStorage<TtContent>
+     * @var ?ObjectStorage<TtContent>
      */
     #[Lazy]
-    protected $ttContent;
+    protected ?ObjectStorage $ttContent;
+
+    protected ?Category $category;
 
     /**
-     * @var Category
+     * @var ?ObjectStorage<Category>
      */
-    protected $category;
+    protected ?ObjectStorage $categories;
 
-    /**
-     * @var ObjectStorage<Category>
-     */
-    protected $categories;
-
-    /**
-     * @param Address $address
-     */
     public function addAddress(Address $address): void
     {
-        $this->addresses->attach($address);
+        $this->addresses?->attach($address);
     }
 
-    /**
-     * @param Address $address
-     */
     public function removeAddress(Address $address): void
     {
-        $this->addresses->detach($address);
+        $this->addresses?->detach($address);
     }
 
     /**
      * @return ObjectStorage<Address>
      */
-    public function getAddresses()
+    public function getAddresses(): ObjectStorage
     {
         return $this->addresses;
     }
@@ -100,26 +76,19 @@ abstract class AbstractContact extends AbstractEntity
         $this->addresses = $addresses;
     }
 
-    /**
-     * @param Phone $phoneNumber
-     */
     public function addPhoneNumber(Phone $phoneNumber): void
     {
-        $this->phoneNumbers->attach($phoneNumber);
+        $this->phoneNumbers?->attach($phoneNumber);
     }
-
-    /**
-     * @param Phone $phoneNumber
-     */
     public function removePhoneNumber(Phone $phoneNumber): void
     {
-        $this->phoneNumbers->detach($phoneNumber);
+        $this->phoneNumbers?->detach($phoneNumber);
     }
 
     /**
      * @return ObjectStorage<Phone> $phoneNumbers
      */
-    public function getPhoneNumbers()
+    public function getPhoneNumbers(): ObjectStorage
     {
         return $this->phoneNumbers;
     }
@@ -132,81 +101,51 @@ abstract class AbstractContact extends AbstractEntity
         $this->phoneNumbers = $phoneNumbers;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     */
     public function setEmail(string $email): void
     {
         $this->email = $email;
     }
 
-    /**
-     * @return string
-     */
     public function getUri(): string
     {
         return $this->uri;
     }
 
-    /**
-     * @param string $uri
-     */
     public function setUri(string $uri): void
     {
         $this->uri = $uri;
     }
 
-    /**
-     * @return string
-     */
     public function getTeaser(): string
     {
         return $this->teaser;
     }
 
-    /**
-     * @param string $teaser
-     */
     public function setTeaser(string $teaser): void
     {
         $this->teaser = $teaser;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     */
     public function setDescription(string $description): void
     {
         $this->description = $description;
     }
 
-    /**
-     * @return string
-     */
     public function getMetaDescription(): string
     {
         return $this->metaDescription;
     }
 
-    /**
-     * @param string $metaDescription
-     */
     public function setMetaDescription(string $metaDescription): void
     {
         $this->metaDescription = $metaDescription;
@@ -215,7 +154,7 @@ abstract class AbstractContact extends AbstractEntity
     /**
      * @return ObjectStorage
      */
-    public function getTtContent()
+    public function getTtContent(): ObjectStorage
     {
         return $this->ttContent;
     }
@@ -228,44 +167,24 @@ abstract class AbstractContact extends AbstractEntity
         $this->ttContent = $ttContent;
     }
 
-    /**
-     * Returns the Main Category
-     *
-     * @return Category
-     */
-    public function getCategory()
+    public function getCategory(): ?Category
     {
-        return $this->category;
+        return $this->category ?? null;
     }
 
-    /**
-     * Sets the Main Category
-     *
-     * @param Category $category
-     */
     public function setCategory($category): void
     {
         $this->category = $category;
     }
 
-    /**
-     * Adds a Product Category
-     *
-     * @param Category $category
-     */
     public function addCategory(Category $category): void
     {
-        $this->categories->attach($category);
+        $this->categories?->attach($category);
     }
 
-    /**
-     * Removes a Category
-     *
-     * @param Category $category
-     */
     public function removeCategory(Category $category): void
     {
-        $this->categories->detach($category);
+        $this->categories?->detach($category);
     }
 
     /**
@@ -273,17 +192,12 @@ abstract class AbstractContact extends AbstractEntity
      *
      * @return ObjectStorage<Category> $categories
      */
-    public function getCategories()
+    public function getCategories(): ObjectStorage
     {
         return $this->categories;
     }
 
-    /**
-     * Returns the First Category
-     *
-     * @return Category
-     */
-    public function getFirstCategory()
+    public function getFirstCategory(): ?Category
     {
         $categories = $this->getCategories();
         if ($categories !== null) {
