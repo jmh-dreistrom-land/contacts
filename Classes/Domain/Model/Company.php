@@ -32,25 +32,33 @@ class Company extends AbstractContact
     protected string $vatId = '';
 
     /**
-     * @var ?ObjectStorage<Contact>
+     * @var ObjectStorage<Contact>
      */
-    protected ?ObjectStorage $directors;
+    protected ObjectStorage $directors;
 
     /**
-     * @var ?ObjectStorage<Contact>
+     * @var ObjectStorage<Contact>
      */
-    protected ?ObjectStorage $contacts;
+    protected ObjectStorage $contacts;
 
     /**
-     * @var ?ObjectStorage<Company>
+     * @var ObjectStorage<Company>
      */
-    protected ?ObjectStorage $companies;
+    protected ObjectStorage $companies;
 
     protected ?FileReference $logo;
 
     public function __construct(string $name)
     {
+        parent::__construct();
         $this->name = $name;
+    }
+
+    public function initializeObject(): void
+    {
+        $this->directors = new ObjectStorage();
+        $this->contacts = new ObjectStorage();
+        $this->companies = new ObjectStorage();
     }
 
     public function getName(): string

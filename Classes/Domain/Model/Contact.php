@@ -29,9 +29,9 @@ class Contact extends AbstractContact
     protected \DateTime $birthday;
 
     /**
-     * @var ?ObjectStorage<Company>
+     * @var ObjectStorage<Company>
      */
-    protected ?ObjectStorage $companies;
+    protected ObjectStorage $companies;
 
     protected ?FileReference $photo;
 
@@ -41,15 +41,16 @@ class Contact extends AbstractContact
         string $firstName,
         string $lastName
     ) {
+        parent::__construct();
         $this->salutation = $salutation;
         $this->title = $title;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
 
-        $this->initStorageObjects();
+        $this->initializeObject();
     }
 
-    protected function initStorageObjects()
+    public function initializeObject(): void
     {
         $this->companies = new ObjectStorage();
         $this->addresses = new ObjectStorage();

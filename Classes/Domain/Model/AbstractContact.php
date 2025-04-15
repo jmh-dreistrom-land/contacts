@@ -18,14 +18,14 @@ use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 abstract class AbstractContact extends AbstractEntity
 {
     /**
-     * @var ?ObjectStorage<Address>
+     * @var ObjectStorage<Address>
      */
-    protected ?ObjectStorage $addresses;
+    protected ObjectStorage $addresses;
 
     /**
-     * @var ?ObjectStorage<Phone>
+     * @var ObjectStorage<Phone>
      */
-    protected ?ObjectStorage $phoneNumbers;
+    protected ObjectStorage $phoneNumbers;
 
     protected string $email = '';
 
@@ -38,17 +38,30 @@ abstract class AbstractContact extends AbstractEntity
     protected string $metaDescription = '';
 
     /**
-     * @var ?ObjectStorage<TtContent>
+     * @var ObjectStorage<TtContent>
      */
     #[Lazy]
-    protected ?ObjectStorage $ttContent;
+    protected ObjectStorage $ttContent;
 
     protected ?Category $category;
 
     /**
-     * @var ?ObjectStorage<Category>
+     * @var ObjectStorage<Category>
      */
-    protected ?ObjectStorage $categories;
+    protected ObjectStorage $categories;
+
+    public function __construct()
+    {
+        $this->initializeObject();
+    }
+
+    public function initializeObject(): void
+    {
+        $this->addresses = new ObjectStorage();
+        $this->phoneNumbers = new ObjectStorage();
+        $this->ttContent = new ObjectStorage();
+        $this->categories = new ObjectStorage();
+    }
 
     public function addAddress(Address $address): void
     {

@@ -40,14 +40,24 @@ class Address extends AbstractEntity
     protected string $lat = '';
 
     /**
-     * @var ?ObjectStorage<TtContent>
+     * @var ObjectStorage<TtContent>
      */
     #[Lazy]
-    protected ?ObjectStorage $ttContent;
+    protected ObjectStorage $ttContent;
 
     protected ?Contact  $contact;
 
     protected ?Company $company;
+
+    public function __construct()
+    {
+        $this->initializeObject();
+    }
+
+    public function initializeObject(): void
+    {
+        $this->ttContent = new ObjectStorage();
+    }
 
     public function setTitle(string $title): void
     {
