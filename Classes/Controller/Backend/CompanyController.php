@@ -74,7 +74,7 @@ class CompanyController extends ActionController
         return $this->moduleTemplate->renderResponse('Backend/Company/List');
     }
 
-    public function createShortcutButton()
+    public function createShortcutButton(): void
     {
         $pageTitle = BackendUtility::getRecordTitle('pages', BackendUtility::getRecord('pages', $this->pageId));
         $routeIdentifier = 'web_contacts'; // array-key of the module-configuration
