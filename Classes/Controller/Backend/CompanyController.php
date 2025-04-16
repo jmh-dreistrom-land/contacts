@@ -26,6 +26,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 class CompanyController extends ActionController
 {
@@ -44,7 +45,7 @@ class CompanyController extends ActionController
     protected function initializeAction(): void
     {
         $this->pageId = (int)($this->request->getParsedBody()['id'] ?? $this->request->getQueryParams()['id'] ?? 0);
-        $this->companyRepository->setDefaultOrderings(['name' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING]);
+        $this->companyRepository->setDefaultOrderings(['name' => QueryInterface::ORDER_ASCENDING]);
         $this->moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $this->createShortcutButton();
     }
