@@ -24,6 +24,7 @@ use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -48,6 +49,16 @@ class CompanyController extends ActionController
         $this->companyRepository->setDefaultOrderings(['name' => QueryInterface::ORDER_ASCENDING]);
         $this->moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $this->createShortcutButton();
+
+        $frameworkConfiguration = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+        );
+        $persistenceConfiguration = [
+            'persistence' => [
+                'storagePid' => $this->pageId,
+            ],
+        ];
+        $this->configurationManager->setConfiguration(array_merge($frameworkConfiguration, $persistenceConfiguration));
     }
 
     public function listAction(int $currentPage = 1): ResponseInterface
