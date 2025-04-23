@@ -16,20 +16,14 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 class CompanyController extends ActionController
 {
-    /**
-     * @var CompanyRepository
-     */
-    protected $companyRepository;
 
     /**
      * @var int
      */
     protected $pageId;
 
-    public function __construct(CompanyRepository $companyRepository)
-    {
-        $this->companyRepository = $companyRepository;
-    }
+    public function __construct(protected CompanyRepository $companyRepository)
+    {}
 
     protected function initializeAction(): void
     {
