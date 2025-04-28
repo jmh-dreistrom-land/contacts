@@ -40,8 +40,7 @@ class CompanyController extends ActionController
         protected readonly LanguageServiceFactory $languageServiceFactory,
         protected readonly IconFactory            $iconFactory,
     )
-    {
-    }
+    {}
 
     protected function initializeAction(): void
     {
