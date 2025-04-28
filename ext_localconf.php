@@ -5,7 +5,6 @@ use Extcode\Contacts\Controller\CompanyController;
 use Extcode\Contacts\Controller\ContactController;
 use Extcode\Contacts\DataHandler\EvalFloat8;
 use Extcode\Contacts\Hooks\DataHandler;
-use Extcode\Contacts\Updates\SlugUpdater;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
@@ -83,10 +82,6 @@ ExtensionUtility::configurePlugin(
 // register "contacts:" namespace
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['contacts'][]
     = 'Extcode\\Contacts\\ViewHelpers';
-
-// update wizard for slugs
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['contactsSlugUpdater'] =
-    SlugUpdater::class;
 
 // clearCachePostProc Hook
 
