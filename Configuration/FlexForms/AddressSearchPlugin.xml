@@ -10,7 +10,7 @@
                         <label>LLL:EXT:contacts/Resources/Private/Language/locallang_be.xlf:tx_contacts.plugin.addressSearch.settings.templateLayout</label>
                         <config>
                             <type>select</type>
-                            <itemsProcFunc>Extcode\Contacts\Hooks\ItemsProcFunc-&gt;user_templateLayout</itemsProcFunc>
+                            <itemsProcFunc>Extcode\Contacts\UserFunctions\ItemsProcFunc-&gt;user_templateLayout</itemsProcFunc>
                             <extKey>contacts</extKey>
                             <pluginName>AddressSearch</pluginName>
                             <renderType>selectSingle</renderType>
