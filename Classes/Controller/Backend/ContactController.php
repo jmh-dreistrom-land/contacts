@@ -34,8 +34,8 @@ class ContactController extends ActionController
     public function __construct(
         protected readonly ContactRepository $contactRepository,
         protected readonly ModuleTemplateFactory $moduleTemplateFactory
-    ) {
-    }
+    )
+    {}
 
     protected function initializeAction(): void
     {

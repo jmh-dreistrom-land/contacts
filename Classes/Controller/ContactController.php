@@ -11,26 +11,21 @@ namespace Extcode\Contacts\Controller;
 
 use Extcode\Contacts\Domain\Model\Contact;
 use Extcode\Contacts\Domain\Repository\ContactRepository;
+use Extcode\Contacts\Controller\ActionController as ContactsActionController;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-class ContactController extends ActionController
+class ContactController extends ContactsActionController
 {
-    /**
-     * @var ContactRepository
-     */
-    protected $contactRepository;
 
     /**
      * @var int
      */
     protected $pageId;
 
-    public function __construct(ContactRepository $contactRepository)
-    {
-        $this->contactRepository = $contactRepository;
-    }
+    public function __construct(protected ContactRepository $contactRepository)
+    {}
 
     protected function initializeAction(): void
     {

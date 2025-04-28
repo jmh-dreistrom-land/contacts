@@ -11,16 +11,14 @@ namespace Extcode\Contacts\Controller;
 
 use Extcode\Contacts\Domain\Model\Company;
 use Extcode\Contacts\Domain\Repository\CompanyRepository;
+use Extcode\Contacts\Controller\ActionController as ContactsActionController;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
-class CompanyController extends ActionController
+class CompanyController extends ContactsActionController
 {
 
-    /**
-     * @var int
-     */
-    protected $pageId;
+    protected int $pageId;
 
     public function __construct(protected CompanyRepository $companyRepository)
     {}
