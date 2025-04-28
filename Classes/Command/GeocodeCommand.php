@@ -19,15 +19,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class GeocodeCommand extends Command
 {
-    /**
-     * @var string
-     */
-    protected $tableName = 'tx_contacts_domain_model_address';
 
-    /**
-     * @var string
-     */
-    protected $googleMapsApiKey = '';
+    protected string $tableName = 'tx_contacts_domain_model_address';
+
+    protected string $googleMapsApiKey = '';
 
     protected function configure(): void
     {
