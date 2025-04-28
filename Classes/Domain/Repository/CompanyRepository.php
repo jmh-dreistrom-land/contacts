@@ -17,12 +17,7 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 class CompanyRepository extends Repository
 {
 
-    /**
-     * @param Demand $demand
-     *
-     * @return QueryResultInterface|array
-     */
-    public function findDemanded(Demand $demand)
+    public function findDemanded(Demand $demand): QueryResultInterface|array
     {
         // settings
         $query = $this->createQuery();
