@@ -4,7 +4,6 @@
 <f:layout name="Module"/>
 
 <f:section name="Content">
-    <f:render partial="Backend/Contact/List/Actions"/>
     <f:if condition="{paginator.paginatedItems}">
         <f:then>
             <f:render partial="Backend/Contact/List/Filter" arguments="{demand: demand, action: 'list'}"/>

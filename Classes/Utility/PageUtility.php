@@ -23,7 +23,6 @@ class PageUtility
      */
     public static function extendPidListByChildren(string $pidList = '', int $recursive = 0): string
     {
-        $recursive = (int)$recursive;
         if ($recursive <= 0) {
             return $pidList;
         }

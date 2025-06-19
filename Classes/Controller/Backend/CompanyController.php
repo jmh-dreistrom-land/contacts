@@ -20,6 +20,7 @@ use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -28,6 +29,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class CompanyController extends ActionController
 {
@@ -35,10 +37,10 @@ class CompanyController extends ActionController
     protected ModuleTemplate $moduleTemplate;
 
     public function __construct(
-        protected readonly CompanyRepository      $companyRepository,
-        protected readonly ModuleTemplateFactory  $moduleTemplateFactory,
+        protected readonly CompanyRepository $companyRepository,
+        protected readonly ModuleTemplateFactory $moduleTemplateFactory,
         protected readonly LanguageServiceFactory $languageServiceFactory,
-        protected readonly IconFactory            $iconFactory,
+        protected readonly IconFactory $iconFactory,
     )
     {}
 
@@ -47,7 +49,7 @@ class CompanyController extends ActionController
         $this->pageId = (int)($this->request->getParsedBody()['id'] ?? $this->request->getQueryParams()['id'] ?? 0);
         $this->companyRepository->setDefaultOrderings(['name' => QueryInterface::ORDER_ASCENDING]);
         $this->moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $this->createShortcutButton();
+        $this->createButtons();
 
         $frameworkConfiguration = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
@@ -85,16 +87,25 @@ class CompanyController extends ActionController
         return $this->moduleTemplate->renderResponse('Backend/Company/List');
     }
 
-    public function createShortcutButton(): void
+    public function createButtons(): void
     {
         $pageTitle = BackendUtility::getRecordTitle('pages', BackendUtility::getRecord('pages', $this->pageId));
         $routeIdentifier = 'web_contacts'; // array-key of the module-configuration
         $buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
+
         $shortcutButton = $buttonBar->makeShortcutButton()
             ->setDisplayName($pageTitle)
             ->setRouteIdentifier($routeIdentifier)
             ->setArguments(['id' => $this->pageId]);
         $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
+
+        $contactsListButton = $buttonBar
+            ->makeLinkButton()
+            ->setTitle(LocalizationUtility::translate('tx_contacts.module.contactController.listAction.menuItem', 'contacts'))
+            ->setShowLabelText(true)
+            ->setIcon($this->iconFactory->getIcon('actions-users',IconSize::SMALL))
+            ->setHref($this->uriBuilder->uriFor('list', null, 'Backend\Contact'));
+        $buttonBar->addButton($contactsListButton);
     }
 
     #[IgnoreValidation(['company'])]

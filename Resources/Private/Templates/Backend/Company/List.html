@@ -6,8 +6,6 @@
 
 
 <f:section name="Content">
-    <f:render partial="Backend/Company/List/Actions"/>
-
     <f:if condition="{paginator.paginatedItems}">
         <f:then>
             <f:render partial="Backend/Company/List/Filter" arguments="{demand: demand, action: 'list'}"/>

@@ -19,12 +19,15 @@ use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use \TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class ContactController extends ActionController
 {
@@ -33,7 +36,8 @@ class ContactController extends ActionController
 
     public function __construct(
         protected readonly ContactRepository $contactRepository,
-        protected readonly ModuleTemplateFactory $moduleTemplateFactory
+        protected readonly ModuleTemplateFactory $moduleTemplateFactory,
+        protected readonly IconFactory $iconFactory,
     )
     {}
 
@@ -42,7 +46,7 @@ class ContactController extends ActionController
         $this->pageId = (int)($this->request->getParsedBody()['id'] ?? $this->request->getQueryParams()['id'] ?? 0);
         $this->contactRepository->setDefaultOrderings(['lastName' => QueryInterface::ORDER_ASCENDING]);
         $this->moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $this->createShortcutButton();
+        $this->createButtons();
     }
 
     public function listAction(int $currentPage = 1): ResponseInterface
@@ -66,11 +70,12 @@ class ContactController extends ActionController
         return $this->moduleTemplate->renderResponse('Backend/Contact/List');
     }
 
-    public function createShortcutButton()
+    public function createButtons()
     {
         $pageTitle = BackendUtility::getRecordTitle('pages', BackendUtility::getRecord('pages', $this->pageId));
         $routeIdentifier = 'web_contacts'; // array-key of the module-configuration
         $buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
+
         $shortcutButton = $buttonBar->makeShortcutButton()
             ->setDisplayName($pageTitle)
             ->setRouteIdentifier($routeIdentifier)
@@ -80,6 +85,14 @@ class ContactController extends ActionController
                 'action' => 'list',
             ]);
         $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
+
+        $companiesListButton = $buttonBar
+            ->makeLinkButton()
+            ->setTitle(LocalizationUtility::translate('tx_contacts.module.companyController.listAction.menuItem', 'contacts'))
+            ->setShowLabelText(true)
+            ->setIcon($this->iconFactory->getIcon('actions-building',IconSize::SMALL))
+            ->setHref($this->uriBuilder->uriFor('list', null, 'Backend\Company'));
+        $buttonBar->addButton($companiesListButton);
     }
 
     #[IgnoreValidation(['contact'])]

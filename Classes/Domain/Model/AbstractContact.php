@@ -28,13 +28,9 @@ abstract class AbstractContact extends AbstractEntity
     protected ObjectStorage $phoneNumbers;
 
     protected string $email = '';
-
     protected string $uri = '';
-
     protected string $teaser = '';
-
     protected string $description = '';
-
     protected string $metaDescription = '';
 
     /**
@@ -165,7 +161,7 @@ abstract class AbstractContact extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage
+     * @return ObjectStorage<TtContent>
      */
     public function getTtContent(): ObjectStorage
     {
@@ -173,7 +169,7 @@ abstract class AbstractContact extends AbstractEntity
     }
 
     /**
-     * @param ObjectStorage $ttContent
+     * @param ObjectStorage<TtContent> $ttContent
      */
     public function setTtContent(ObjectStorage $ttContent): void
     {

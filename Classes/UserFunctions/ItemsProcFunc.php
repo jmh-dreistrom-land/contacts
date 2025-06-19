@@ -45,8 +45,8 @@ class ItemsProcFunc
             $templateLayouts = $this->reduceTemplateLayouts($templateLayouts, $currentColPos);
             foreach ($templateLayouts as $layout) {
                 $additionalLayout = [
-                    htmlspecialchars($this->getLanguageService()->sL($layout[0])),
-                    $layout[1]
+                    'label' => htmlspecialchars($this->getLanguageService()->sL($layout[0])),
+                    'value' => $layout[1],
                 ];
                 $config['items'][] = $additionalLayout;
             }

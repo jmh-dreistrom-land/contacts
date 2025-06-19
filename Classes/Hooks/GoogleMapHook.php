@@ -18,21 +18,13 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 class GoogleMapHook
 {
     protected CountryRepository $countryRepository;
-
     protected array $pluginSettings = [];
-
     protected string $idPrefix = '';
-
     protected string $tableName = '';
-
     protected string $addressId = '';
-
     protected string $latFieldName = 'lat';
-
     protected string $lonFieldName = 'lon';
-
     protected float $latitude = 51.439310;
-
     protected float $longitude = 9.997579;
 
     protected function init(array $params): void

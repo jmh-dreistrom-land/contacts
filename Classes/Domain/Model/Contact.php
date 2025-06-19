@@ -15,9 +15,7 @@ use TYPO3\CMS\Extbase\Annotation\Validate;
 
 class Contact extends AbstractContact
 {
-
     protected string $salutation = '';
-
     protected string $title = '';
 
     #[Validate(['validator' => 'NotEmpty'])]
@@ -52,9 +50,8 @@ class Contact extends AbstractContact
 
     public function initializeObject(): void
     {
+        parent::initializeObject();
         $this->companies = new ObjectStorage();
-        $this->addresses = new ObjectStorage();
-        $this->phoneNumbers = new ObjectStorage();
     }
 
     public function setSalutation(string $salutation): void

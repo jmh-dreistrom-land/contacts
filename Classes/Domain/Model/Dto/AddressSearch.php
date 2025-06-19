@@ -13,17 +13,11 @@ namespace Extcode\Contacts\Domain\Model\Dto;
 class AddressSearch
 {
     protected float $lat = 0.0;
-
     protected float $lon = 0.0;
-
     protected int $radius = 0;
-
     protected string $pids = '';
-
     protected string $searchString = '';
-
     protected string $orderBy = '';
-
     protected string $fallbackOrderBy = '';
 
     public function getLat(): float

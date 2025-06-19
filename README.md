@@ -27,13 +27,14 @@ Download and install the extension with the extension manager module.
 
 ## 3.1 Compatibility and supported Versions
 
-| Contacts      | TYPO3      | PHP       | Support/Development                  |
-| ------------- | ---------- | ----------|--------------------------------------|
-| 4.x.x         | 10.4, 11.5 | 7.2+      | Features, Bugfixes, Security Updates |
-| 3.x.x         | 9.5        | 7.2 - 7.4 | Bugfixes, Security Updates           |
-| 2.x.x         | 8.7        | 7.0 - 7.2 | Security Updates                     |
-| 1.x.x         | 7.6        | 5.6 - 7.1 |                                      |
-| 0.x.x         |            |           |                                      |
+| Contacts | TYPO3      | PHP       | Support/Development                  |
+|----------|------------|-----------|--------------------------------------|
+| 5.x.x    | 13.4       | 8.2       | Upgrade TYPO3 v13                    |
+| 4.x.x    | 10.4, 11.5 | 7.2+      | Features, Bugfixes, Security Updates |
+| 3.x.x    | 9.5        | 7.2 - 7.4 | Bugfixes, Security Updates           |
+| 2.x.x    | 8.7        | 7.0 - 7.2 | Security Updates                     |
+| 1.x.x    | 7.6        | 5.6 - 7.1 |                                      |
+| 0.x.x    |            |           |                                      |
 
 ### 3.2. Changelog
 

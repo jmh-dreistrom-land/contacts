@@ -16,28 +16,18 @@ use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 class Address extends AbstractEntity
 {
     protected string $title = '';
-
     protected string $type = 'INTL,POSTAL,PARCEL,WORK';
-
     protected string $street = '';
-
     protected string $streetNumber = '';
-
     protected string $addition1 = '';
-
     protected string $addition2 = '';
-
     protected string $zip = '';
-
     protected string $city = '';
-
     protected string $region = '';
-
     protected ?Country $country;
-
     protected string $postBox = '';
-
     protected string $lat = '';
+    protected string $lon = '';
 
     /**
      * @var ObjectStorage<TtContent>
@@ -219,7 +209,7 @@ class Address extends AbstractEntity
     }
 
     /**
-     * @param ObjectStorage $ttContent
+     * @param ObjectStorage<TtContent> $ttContent
      */
     public function setTtContent(ObjectStorage $ttContent): void
     {
@@ -227,7 +217,7 @@ class Address extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage
+     * @return ObjectStorage<TtContent>
      */
     public function getTtContent(): ObjectStorage
     {

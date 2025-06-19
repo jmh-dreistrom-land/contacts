@@ -15,20 +15,13 @@ use TYPO3\CMS\Extbase\Annotation\Validate;
 
 class Company extends AbstractContact
 {
-
     #[Validate(['validator' => 'NotEmpty'])]
     protected string $name;
-
     protected string $legalName = '';
-
     protected string $legalForm = '';
-
     protected string $registeredOffice = '';
-
     protected string $registerCourt = '';
-
     protected string $registerNumber = '';
-
     protected string $vatId = '';
 
     /**

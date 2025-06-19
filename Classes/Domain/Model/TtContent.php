@@ -13,137 +13,71 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class TtContent extends AbstractEntity
 {
     protected \DateTime $crdate;
-
     protected \DateTime $tstamp;
-
     protected string $contentType;
-
     protected string $header;
-
     protected string $headerPosition;
-
     protected string $bodytext;
-
     protected int $colPos;
-
     protected string $image;
-
     protected int $imagewidth;
-
     protected int $imageheight;
-
     protected int $imageorient;
-
     protected string $imagecaption;
-
     protected int $imagecols;
-
     protected int $imageborder;
-
     protected string $media;
-
     protected string $layout;
-
     protected int $cols;
-
     protected string $subheader;
-
     protected string $headerLink;
-
     protected string $imageLink;
-
     protected string $imageZoom;
-
     protected string $altText;
-
     protected string $titleText;
-
     protected string $headerLayout;
-
     protected string $listType;
-
     protected string $records;
-
     protected string $pages;
-
     protected string $feGroup;
-
     protected string $imagecaptionPosition;
-
     protected string $longdescUrl;
-
     protected string $menuType;
-
     protected string $selectKey;
-
     protected string $fileCollections;
-
     protected string $filelinkSorting;
-
     protected string $target;
-
     protected string $multimedia;
-
     protected string $piFlexform;
-
     protected string $accessibilityTitle;
-
     protected string $accessibilityBypassText;
-
     protected string $selectedCategories;
-
     protected string $categoryField;
-
     protected int $spaceBefore;
-
     protected int $spaceAfter;
-
     protected int $imageNoRows;
-
     protected int $imageEffects;
-
     protected int $imageCompression;
-
     protected int $tableBorder;
-
     protected int $tableCellspacing;
-
     protected int $tableCellpadding;
-
     protected int $tableBgColor;
-
     protected int $sectionIndex;
-
     protected int $linkToTop;
-
     protected int $filelinkSize;
-
     protected int $sectionFrame;
-
     protected int $date;
-
     protected int $imageFrames;
-
     protected int $recursive;
-
     protected int $rteEnabled;
-
     protected int $txImpexpOriguid;
-
     protected int $accessibilityBypass;
-
     protected int $sysLanguageUid;
-
     protected int $starttime;
-
     protected int $endtime;
-
     protected string $txGridelementsBackendLayout;
-
     protected int $txGridelementsChildren;
-
     protected int $txGridelementsContainer;
-
     protected int $txGridelementsColumns;
 
     public function getCrdate(): \DateTime

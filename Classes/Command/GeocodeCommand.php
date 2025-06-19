@@ -9,6 +9,7 @@ namespace Extcode\Contacts\Command;
  * LICENSE file that was distributed with this source code.
  */
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,11 +18,10 @@ use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+#[AsCommand('contacts:geocode', 'Geocode addresses of contact extension')]
 class GeocodeCommand extends Command
 {
-
     protected string $tableName = 'tx_contacts_domain_model_address';
-
     protected string $googleMapsApiKey = '';
 
     protected function configure(): void
@@ -66,7 +66,7 @@ class GeocodeCommand extends Command
             ->select('uid', 'lat', 'lon', 'street', 'street_number', 'zip', 'city')
             ->from($this->tableName)
             ->where(
-                $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->and(
                     $queryBuilder->expr()->eq('deleted', 0),
                     $queryBuilder->expr()->eq('lat', 0),
                     $queryBuilder->expr()->eq('lon', 0)
@@ -110,7 +110,8 @@ class GeocodeCommand extends Command
                     )
                     ->set('lat', $lat)
                     ->set('lon', $lng)
-                    ->execute();
+                    ->executeStatement();
+
                 $posResult++;
             } else {
                 $negResult++;
