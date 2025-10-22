@@ -103,7 +103,12 @@ return [
             'label' => $_LLL_core_general . ':LGL.hidden',
             'config' => [
                 'type' => 'check',
-                'renderType' => 'checkboxToggle'
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
+                    ],
+                ],
             ],
         ],
         'starttime' => [
