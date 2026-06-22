@@ -9,6 +9,7 @@ namespace Extcode\Contacts\Command;
  * LICENSE file that was distributed with this source code.
  */
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,17 +18,11 @@ use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+#[AsCommand('contacts:geocode', 'Geocode addresses of contact extension')]
 class GeocodeCommand extends Command
 {
-    /**
-     * @var string
-     */
-    protected $tableName = 'tx_contacts_domain_model_address';
-
-    /**
-     * @var string
-     */
-    protected $googleMapsApiKey = '';
+    protected string $tableName = 'tx_contacts_domain_model_address';
+    protected string $googleMapsApiKey = '';
 
     protected function configure(): void
     {
@@ -45,14 +40,14 @@ class GeocodeCommand extends Command
         $this->googleMapsApiKey = $contactsConfiguration['googleMapsApiKey'];
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('');
 
         if (empty($this->googleMapsApiKey)) {
             $output->writeln('ApiKey is missing!');
             $output->writeln('');
-            return;
+            return Command::FAILURE;
         }
 
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
@@ -64,21 +59,21 @@ class GeocodeCommand extends Command
             ->where(
                 $queryBuilder->expr()->eq('deleted', 0)
             )
-            ->execute()
-            ->fetchColumn(0);
+            ->executeQuery()
+            ->fetchOne();
 
         $addresses = $queryBuilder
             ->select('uid', 'lat', 'lon', 'street', 'street_number', 'zip', 'city')
             ->from($this->tableName)
             ->where(
-                $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->and(
                     $queryBuilder->expr()->eq('deleted', 0),
                     $queryBuilder->expr()->eq('lat', 0),
                     $queryBuilder->expr()->eq('lon', 0)
                 )
             )
-            ->execute()
-            ->fetchAll();
+            ->executeQuery()
+            ->fetchAllAssociative();
 
         $cntAddressesToProcess = count($addresses);
         $addressesProcessed = $addressCountAll - $cntAddressesToProcess;
@@ -86,11 +81,10 @@ class GeocodeCommand extends Command
         if ($cntAddressesToProcess === 0) {
             $output->writeln('Nothing to do here.');
             $output->writeln('');
-            return;
+            return Command::SUCCESS;
         }
 
         $progress = new ProgressBar($output, $addressCountAll);
-
         $progress->start();
         $progress->advance($addressesProcessed);
 
@@ -116,7 +110,8 @@ class GeocodeCommand extends Command
                     )
                     ->set('lat', $lat)
                     ->set('lon', $lng)
-                    ->execute();
+                    ->executeStatement();
+
                 $posResult++;
             } else {
                 $negResult++;
@@ -130,6 +125,8 @@ class GeocodeCommand extends Command
         $output->writeln('');
 
         $progress->finish();
+
+        return Command::SUCCESS;
     }
 
     protected function geocode(string $address): array

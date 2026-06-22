@@ -18,7 +18,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  *
  * # Example: Basic Example: product title as og:title meta tag
  * <code>
- * <cart:metaTag property="og:title" content="{product.title}" />
+ * <contacts:metaTag property="og:title" content="{product.title}" />
  * </code>
  * <output>
  * <meta property="og:title" content="TYPO3 is awesome" />
@@ -31,9 +31,6 @@ class MetaTagViewHelper extends AbstractViewHelper
      */
     protected $tagName = 'meta';
 
-    /**
-     * Arguments initialization
-     */
     public function initializeArguments()
     {
         $this->registerArgument(

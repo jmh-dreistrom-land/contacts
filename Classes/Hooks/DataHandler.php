@@ -14,17 +14,15 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class DataHandler
 {
-
     /**
-     * Flushes the cache if a news record was edited.
+     * Flushes the cache if a contact or company record was edited.
      * This happens on two levels: by UID and by PID.
-     *
-     * @param array $params
      */
-    public function clearCachePostProc(array $params)
+    public function clearCachePostProc(array $params): void
     {
-        if (($params['table'] !== 'tx_contacts_domain_model_contact') &&
-            ($params['table'] !== 'tx_contacts_domain_model_company')
+        $table = $params['table'] ?? '';
+        if (($table !== 'tx_contacts_domain_model_contact') &&
+            ($table !== 'tx_contacts_domain_model_company')
         ) {
             return;
         }
@@ -37,10 +35,6 @@ class DataHandler
         }
     }
 
-    /**
-     * @param array $params
-     * @return array
-     */
     protected function getCacheTagsToFlush(array $params): array
     {
         $cachePrefix = 'tx_contacts_';
